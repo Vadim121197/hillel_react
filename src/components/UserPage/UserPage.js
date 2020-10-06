@@ -4,7 +4,7 @@ import {useParams} from 'react-router-dom'
 import useFetch from 'use-http'
 import {Card, Image, Icon} from 'semantic-ui-react'
 
-const UserPage = () => {
+const UserPage = (props) => {
   const {id} = useParams()
   
   const {
@@ -13,7 +13,7 @@ const UserPage = () => {
     data = []
   } = useFetch(`https://jsonplaceholder.typicode.com/users/${id}`, {}, [])
 
-  console.log(data)
+  console.log(props)
   return (
     <div>
       <Card>

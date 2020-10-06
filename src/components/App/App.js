@@ -3,12 +3,20 @@ import React from 'react'
 import Header from '../Header/Header'
 import AppSwitch from '../App/AppSwitch/AppSwitch'
 //import library
-import {Grid, Menu} from 'semantic-ui-react'
-import {BrowserRouter, Switch, Route} from 'react-router-dom'
+import {Grid, Modal, Button} from 'semantic-ui-react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+
+
 
 const App = () => {
+
+  
+  const getConfirm = (content, callback) => {
+    const allowTransition = window.confirm(content);
+    callback(allowTransition);
+  }
   return (
-    <BrowserRouter>
+    <Router getUserConfirmation={getConfirm}>
       <Grid>
         <Grid.Row>
           <Header/>
@@ -17,7 +25,7 @@ const App = () => {
       <Grid.Row>
         <AppSwitch/>
       </Grid.Row>
-    </BrowserRouter>
+    </Router>
   )
 }
 

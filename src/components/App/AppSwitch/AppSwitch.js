@@ -6,6 +6,7 @@ import UserPage from '../../UserPage/UserPage'
 import {Switch, Route} from 'react-router-dom'
 
 const AppSwitch = () => {
+  const a = 10
   return (
     <Switch>
       <Route exact path="/">
@@ -17,9 +18,7 @@ const AppSwitch = () => {
       <Route exact path="/users">
         <UsersList/>
       </Route>
-      <Route exact path="/users/:id">
-        <UserPage />
-      </Route>
+      <Route exact path="/users/:id" render={props => <UserPage {...props} a={a}/>}/>
     </Switch>
   )
 }

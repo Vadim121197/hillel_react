@@ -3,8 +3,8 @@ import React from 'react'
 import Header from '../Header/Header'
 import AppSwitch from '../App/AppSwitch/AppSwitch'
 //import library
-import {Grid, Modal, Button} from 'semantic-ui-react'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import {Grid} from 'semantic-ui-react'
+import {BrowserRouter as Router} from 'react-router-dom'
 
 
 

@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 //import components
-import UserListCard from '../UserListCard/UserListCard'
+import UserListCard from './UserListCard/UserListCard'
 //import library
 import useFetch from 'use-http'
-import {Image, List, Loader} from 'semantic-ui-react'
+import {List, Loader} from 'semantic-ui-react'
 
 const UsersList = () => {
   //use new hook useFetch
@@ -24,7 +24,6 @@ const UsersList = () => {
           {data.map(user => <UserListCard key={user.id} user={user}/>)}
         </List>
   } < />
-     
   )
 }
 

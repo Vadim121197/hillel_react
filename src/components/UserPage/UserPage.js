@@ -1,35 +1,27 @@
 import React from 'react'
+//import components
+import UserCard from './UserCard/UserCard'
+import Albums from './Albums/Albums'
+import Posts from './Posts/Posts'
 //import library
 import {useParams} from 'react-router-dom'
-import useFetch from 'use-http'
-import {Card, Image, Icon} from 'semantic-ui-react'
+import {Grid} from 'semantic-ui-react'
 
-const UserPage = (props) => {
+const UserPage = () => {
   const {id} = useParams()
-  
-  const {
-    loading,
-    error,
-    data = []
-  } = useFetch(`https://jsonplaceholder.typicode.com/users/${id}`, {}, [])
 
-  console.log(props)
   return (
-    <div>
-      <Card>
-        <Image
-          src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg'
-          wrapped
-          ui={false}/>
-        <Card.Content>
-          <Card.Header>Daniel</Card.Header>
-          <Card.Meta>Joined in 2016</Card.Meta>
-          <Card.Description>
-            Daniel is a comedian living in Nashville.
-          </Card.Description>
-        </Card.Content>
-      </Card>
-    </div>
+    <Grid>
+      <Grid.Column width={4}>
+        <UserCard id={id}/>
+      </Grid.Column>
+      <Grid.Column width={9}>
+        <Albums userId={id}/>
+        <br/>
+        <br/>
+        <Posts userId={id}/>
+      </Grid.Column>
+    </Grid>
   )
 }
 

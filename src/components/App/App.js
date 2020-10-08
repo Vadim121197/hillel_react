@@ -6,25 +6,22 @@ import AppSwitch from '../App/AppSwitch/AppSwitch'
 import {Grid} from 'semantic-ui-react'
 import {BrowserRouter as Router} from 'react-router-dom'
 
-
-
 const App = () => {
 
-  
-  const getConfirm = (content, callback) => {
-    const allowTransition = window.confirm(content);
-    callback(allowTransition);
-  }
   return (
-    <Router getUserConfirmation={getConfirm}>
-      <Grid>
+    <Router>
+      <Grid divided='vertically'>
+        <Grid.Row columns={1}>
+          <Grid.Column>
+            <Header/>
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
-          <Header/>
+          <Grid.Column>
+            <AppSwitch/>
+          </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Grid.Row>
-        <AppSwitch/>
-      </Grid.Row>
     </Router>
   )
 }

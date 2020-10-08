@@ -10,7 +10,7 @@ const Posts = ({userId}) => {
     loading,
     error,
     data = []
-  } = useFetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`, {}, [])
+  } = useFetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`, {}, [userId])
 
   if (error) {
     console.log(error)

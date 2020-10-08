@@ -1,0 +1,7 @@
+.activeLink{
+    background-color: #3e968a;
+    color: #1d2c43;
+}
+.activeLink:hover {
+    color: #1d2c43;
+  }

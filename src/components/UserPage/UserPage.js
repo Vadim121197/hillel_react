@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 //import components
 import UserCard from './UserCard/UserCard'
 import Albums from './Albums/Albums'
@@ -12,10 +12,10 @@ const UserPage = () => {
 
   return (
     <Grid>
-      <Grid.Column width={4}>
+      <Grid.Column width={5}>
         <UserCard id={id}/>
       </Grid.Column>
-      <Grid.Column width={9}>
+      <Grid.Column width={7}>
         <Albums userId={id}/>
         <br/>
         <br/>

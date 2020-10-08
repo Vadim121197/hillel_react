@@ -4,6 +4,7 @@ import UsersList from '../../UsersList/UsersList'
 import UserPage from '../../UserPage/UserPage'
 //import library
 import {Switch, Route} from 'react-router-dom'
+import AlbumModal from '../../UserPage/Albums/AlbumCard/AlbumModal/AlbumModal'
 
 const AppSwitch = () => {
   return (
@@ -14,11 +15,11 @@ const AppSwitch = () => {
       <Route exact path="/about">
         About
       </Route>
-      <Route exact path="/users">
+      <Route path="/users">
         <UsersList/>
       </Route>
-      <Route exact path="/users/:id" render={props => <UserPage {...props} />}/>
-      <Route exact path='/users/:id/album/:albumId'>Album</Route>
+      {/* <Route path="/users/:id" render={props => <UserPage {...props} />}/> */}
+      <Route exact path='/users/:id/album/:albumId'><AlbumModal/></Route>
     </Switch>
   )
 }

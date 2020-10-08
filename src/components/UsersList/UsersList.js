@@ -1,9 +1,12 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 //import components
 import UserListCard from './UserListCard/UserListCard'
 //import library
 import useFetch from 'use-http'
-import {List, Loader} from 'semantic-ui-react'
+import {Grid, List, Loader} from 'semantic-ui-react'
+import {Route} from 'react-router-dom'
+import UserPage from '../UserPage/UserPage'
+import AlbumModal from '../UserPage/Albums/AlbumCard/AlbumModal/AlbumModal'
 
 const UsersList = () => {
   //use new hook useFetch
@@ -17,13 +20,28 @@ const UsersList = () => {
     console.log(error)
   }
 
-  return ( <> {
-    loading
-      ? <Loader active inline='centered'/>
-      : <List celled>
-          {data.map(user => <UserListCard key={user.id} user={user}/>)}
-        </List>
-  } < />
+  return (
+    <Fragment>
+      {loading
+        ? <Loader active inline='centered'/>
+        : (
+          <Grid divided='vertically'>
+            <Grid.Row columns={2}>
+              <Grid.Column width={3}>
+                <List>
+                  {data.map(user => <UserListCard key={user.id} user={user}/>)}
+                </List>
+              </Grid.Column>
+              <Grid.Column width={9}>
+                <Route path="/users/:id">
+                  <UserPage/>
+                </Route>
+                <Route path='/users/:id/album/:albumId'><AlbumModal /></Route>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        )}
+    </Fragment>
   )
 }
 

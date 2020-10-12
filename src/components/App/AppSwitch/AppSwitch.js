@@ -1,25 +1,27 @@
 import React from 'react'
 //import components
 import UsersList from '../../UsersList/UsersList'
-import UserPage from '../../UserPage/UserPage'
 //import library
 import {Switch, Route} from 'react-router-dom'
 import AlbumModal from '../../UserPage/Albums/AlbumCard/AlbumModal/AlbumModal'
+import PostList from '../../PostList/PostList'
+import AlbumList from '../../AlbumList/AlbumList'
 
 const AppSwitch = () => {
   return (
     <Switch>
       <Route exact path="/">
-        Home
+        <PostList/>
       </Route>
-      <Route exact path="/about">
-        About
+      <Route path="/albums">
+        <AlbumList/>
       </Route>
       <Route path="/users">
         <UsersList/>
       </Route>
-      {/* <Route path="/users/:id" render={props => <UserPage {...props} />}/> */}
-      <Route exact path='/users/:id/album/:albumId'><AlbumModal/></Route>
+      <Route exact path='/users/:id/album/:albumId'>
+        <AlbumModal/>
+      </Route>
     </Switch>
   )
 }

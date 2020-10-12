@@ -1,8 +1,7 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment} from 'react'
 import { NavLink, useRouteMatch } from 'react-router-dom'
 //import library
 import {List} from 'semantic-ui-react'
-import AlbumModal from './AlbumModal/AlbumModal'
 
 const AlbumCard = ({album}) => {
   const match = useRouteMatch()
@@ -16,7 +15,6 @@ const AlbumCard = ({album}) => {
             <NavLink to={`${match.url}/album/${id}`}>{title}</NavLink>  
           </List.Header>
         </List.Content>
-        
       </List.Item>
     </Fragment>
   )

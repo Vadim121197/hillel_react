@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React from 'react'
 //import components
 import UserCard from './UserCard/UserCard'
 import Albums from './Albums/Albums'

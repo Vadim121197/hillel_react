@@ -2,10 +2,8 @@ import React, {Fragment} from 'react'
 //import componentns
 import AlbumCard from './AlbumCard/AlbumCard'
 //import library
-import {List, Loader} from 'semantic-ui-react'
+import {List} from 'semantic-ui-react'
 import useFetch from 'use-http'
-import { Route } from 'react-router-dom'
-import AlbumModal from './AlbumCard/AlbumModal/AlbumModal'
 
 const Albums = ({userId}) => {
   const {

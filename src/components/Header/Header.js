@@ -6,7 +6,8 @@ import {NavLink} from 'react-router-dom'
 const Header = () => {
   return (
     <Menu secondary>
-      <Menu.Item exact as={NavLink} to="/" name='home' />
+      <Menu.Item exact as={NavLink} to="/" name='posts' />
+      <Menu.Item exact as={NavLink} to="/albums" name='albums' />
       <Menu.Item as={NavLink} to="/users" name='users'/>
     </Menu>
   )

@@ -1,41 +1,45 @@
-import React, {useState} from 'react'
+import React, {Fragment, useState} from 'react'
 //import library
-import {Image, Modal, Button} from 'semantic-ui-react'
-import {NavLink, useHistory, useRouteMatch, useParams} from 'react-router-dom'
+import {Modal, Button} from 'semantic-ui-react'
+import {useHistory, useParams, useRouteMatch} from 'react-router-dom'
+import useFetch from 'use-http'
+import GlideJS from '../../../../Glide/GlideJS'
 
 const AlbumModal = () => {
   const [open, setOpen] = useState(true)
-  const {id, albumsId} = useParams()
+  const {id, albumId} = useParams()
   const history = useHistory()
-  
-//   const {id, title} = album
-//   const triggerElement = (
-//     <NavLink to={`${match.url}/album/${id}`} onClick={() => history.push(`${match.url}/album/${id}`)}>{title}</NavLink>
-//   )
-  
+  const {path} = useRouteMatch()
+
+  const {
+    loading,
+    data = []
+  } = useFetch(`https://jsonplaceholder.typicode.com/albums/${albumId}/photos`, {}, [albumId])
+
   const handleClose = () => {
     setOpen(false)
-    history.push(`/users/${id}`)
+    if(path === `/albums/album/:albumId`) {
+      history.push(`/albums`)
+    }else if(path === `/users/:id/album/:albumId`){
+      history.push(`/users/${id}`)
+    }
+    
   }
-  console.log(albumsId)
+
+  console.log(path)
   return (
-    <Modal
-      onClose={handleClose}
-      open={open}
-      size="fullscreen"
-      >
-      <Modal.Content image>
-        <Image
-          size='small'
-          src='https://react.semantic-ui.com/images/wireframe/image-square.png'
-          wrapped/>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button onClick={handleClose} positive>
-          Ok
-        </Button >
-      </Modal.Actions>
-    </Modal>
+    <Fragment>
+      {loading || <Modal onClose={handleClose} open={open} size="large">
+        <Modal.Content image>
+          <GlideJS images={data}/>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={handleClose} positive>
+            Ok
+          </Button >
+        </Modal.Actions>
+      </Modal>}
+    </Fragment>
   )
 }
 

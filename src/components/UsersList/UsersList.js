@@ -1,7 +1,5 @@
 import React, {Fragment} from 'react'
-//import components
 import UserListCard from './UserListCard/UserListCard'
-//import library
 import useFetch from 'use-http'
 import {Grid, List, Loader} from 'semantic-ui-react'
 import {Route} from 'react-router-dom'
@@ -9,7 +7,7 @@ import UserPage from '../UserPage/UserPage'
 import AlbumModal from '../UserPage/Albums/AlbumCard/AlbumModal/AlbumModal'
 
 const UsersList = () => {
-  //use new hook useFetch
+
   const {
     loading,
     error,
@@ -36,7 +34,7 @@ const UsersList = () => {
                 <Route path="/users/:id">
                   <UserPage/>
                 </Route>
-                <Route path='/users/:id/album/:albumId'><AlbumModal /></Route>
+                <Route path='/users/:id/album/:albumId'><AlbumModal/></Route>
               </Grid.Column>
             </Grid.Row>
           </Grid>

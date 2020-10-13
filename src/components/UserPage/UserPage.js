@@ -1,11 +1,9 @@
 import React from 'react'
-//import components
 import UserCard from './UserCard/UserCard'
 import Albums from './Albums/Albums'
-import Posts from './Posts/Posts'
-//import library
 import {useParams} from 'react-router-dom'
 import {Grid} from 'semantic-ui-react'
+import PostList from '../PostList/PostList'
 
 const UserPage = () => {
   const {id} = useParams()
@@ -19,7 +17,7 @@ const UserPage = () => {
         <Albums userId={id}/>
         <br/>
         <br/>
-        <Posts userId={id}/>
+        <PostList url={`https://jsonplaceholder.typicode.com/users/${id}/posts`}/>
       </Grid.Column>
     </Grid>
   )

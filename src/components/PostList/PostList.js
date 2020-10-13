@@ -3,13 +3,11 @@ import {List, Loader} from 'semantic-ui-react'
 import useFetch from 'use-http'
 import PostCard from '../UserPage/Posts/PostCard/PostCard'
 
-const PostList = () => {
-  
+const PostList = ({url}) => {
   const {
     loading,
-    error,
     data = []
-  } = useFetch(`https://jsonplaceholder.typicode.com/posts`, {}, [])
+  } = useFetch(url, {}, [])
 
   return (
     <Fragment>

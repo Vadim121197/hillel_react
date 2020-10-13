@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-//import library
+import PropTypes from 'prop-types'
 import {NavLink} from 'react-router-dom'
 import {List, Image} from 'semantic-ui-react'
 import './UserListCard.css'
@@ -21,4 +21,9 @@ const UserListCard = ({user}) => {
     </Fragment>
   )
 }
+
+UserListCard.propTypes = {
+  user: PropTypes.object.isRequired
+}
+
 export default UserListCard

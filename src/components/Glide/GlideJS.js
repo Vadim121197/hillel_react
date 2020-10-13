@@ -6,7 +6,6 @@ import '@glidejs/glide/dist/css/glide.theme.min.css'
 import PropTypes from 'prop-types'
 import {Image} from 'semantic-ui-react'
 
-
 const initialOptions = {
   startAt: 0,
   perView: 4,
@@ -16,12 +15,12 @@ const initialOptions = {
 const GlideJS = ({images}) => {
   const refs = useRef('#slider')
   const [slider] = useState(new Glide(refs.current, initialOptions))
-  
+
   useEffect(() => {
     slider.mount()
     return () => slider.destroy()
   }, [])
-  
+
   return (
     <div id="slider" ref={refs} className="glide">
       <div className="glide__track" data-glide-el="track">

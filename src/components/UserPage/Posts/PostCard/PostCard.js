@@ -1,10 +1,10 @@
 import React, {Fragment} from 'react'
 import {useState} from 'react'
 import {NavLink} from 'react-router-dom'
-//import library
 import {List, Header} from 'semantic-ui-react'
 import useFetch from 'use-http'
 import CommentsList from './CommentsList/CommentsList'
+import PropTypes from 'prop-types'
 
 const PostCard = ({post}) => {
   const {title, body, userId, id} = post
@@ -12,8 +12,6 @@ const PostCard = ({post}) => {
     setIsClicked] = useState(false)
 
   const {
-    loading,
-    error,
     data = []
   } = useFetch(`https://jsonplaceholder.typicode.com/users/${userId}`, {}, [userId])
 
@@ -36,6 +34,10 @@ const PostCard = ({post}) => {
       </List.Item>
     </Fragment>
   )
+}
+
+PostCard.propTypes = {
+  post: PropTypes.object.isRequired
 }
 
 export default PostCard

@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
-//import library
 import {Card, Image, Loader} from 'semantic-ui-react'
 import useFetch from 'use-http'
+import PropTypes from 'prop-types'
 
 const UserCard = ({id}) => {
   console.log()
@@ -40,6 +40,10 @@ const UserCard = ({id}) => {
         )}
     </Fragment>
   )
+}
+
+UserCard.propTypes = {
+  id: PropTypes.string.isRequired
 }
 
 export default UserCard

@@ -3,7 +3,7 @@ import "./ProductsPage.css";
 import ProductCard from "./ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 
-const ProductsPage = ({}) => {
+const ProductsPage = () => {
   const { productList } = useSelector((state) => state.products);
  
   return (

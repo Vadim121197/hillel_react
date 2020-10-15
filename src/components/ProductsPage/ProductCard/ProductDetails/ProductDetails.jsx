@@ -1,15 +1,25 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { addToCart } from "../../../../redux/actions/cartActions";
+import { useDispatch } from "react-redux";
 
-const ProductDetails = ({ name, price }) => {
+const ProductDetails = ({ id, name, price }) => {
+  const dispatch = useDispatch()
   return (
     <div className="details">
       <div className="textContent">
         <h3>{name}</h3>
         <div className="price">{price} $</div>
       </div>
-      <button>ADD TO CART</button>
+      <button onClick={() => dispatch(addToCart(id))}>ADD TO CART</button>
     </div>
   );
+};
+
+ProductDetails.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
 };
 
 export default ProductDetails;

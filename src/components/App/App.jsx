@@ -5,8 +5,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Header from "../Header/Header";
 import AppSwitch from "./AppSwitch/AppSwitch";
+import { useSelector } from "react-redux";
 
 const App = () => {
+  const store= useSelector((state) => state);
+  console.log(store)
   return (
     <div className="wrapper">
       <Router>

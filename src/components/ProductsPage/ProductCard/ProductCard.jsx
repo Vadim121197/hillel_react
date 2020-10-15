@@ -1,11 +1,13 @@
 import React from "react";
-import ProductImage from "./ProductImage/ProductImage";
+import PropTypes from 'prop-types';
 
+import ProductImage from "./ProductImage/ProductImage";
 import "./ProductCard.css";
 import ProductDetails from "./ProductDetails/ProductDetails";
 
 const ProductCard = ({ product }) => {
   const {id, name, price, image } = product;
+  
   return (
     <div className="card">
       <ProductImage image={image} />
@@ -13,5 +15,9 @@ const ProductCard = ({ product }) => {
     </div>
   );
 };
+
+ProductCard.propTypes = {
+  product: PropTypes.object.isRequired
+}
 
 export default ProductCard;

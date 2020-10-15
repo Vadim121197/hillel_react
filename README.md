@@ -5,3 +5,4 @@
 3. Array of products +++++++
 4. Use local storage for Cart
 5. Good redux
+5. animated app

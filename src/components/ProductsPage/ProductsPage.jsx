@@ -1,12 +1,14 @@
 import React from "react";
 import "./ProductsPage.css";
-import { products } from "../../data/products";
 import ProductCard from "./ProductCard/ProductCard";
+import { useSelector } from "react-redux";
 
-const ProductsPage = () => {
+const ProductsPage = ({}) => {
+  const { productList } = useSelector((state) => state.products);
+ 
   return (
     <div className="products__wrapper">
-      {products.map((product) => {
+      {productList.map((product) => {
         return (
           <ProductCard
             alt=""

@@ -4,16 +4,18 @@ import ProductCard from "./ProductCard/ProductCard";
 import { useSelector } from "react-redux";
 
 const ProductsPage = () => {
-  const { productList } = useSelector((state) => state.products);
- 
+
+  const products = useSelector((state) => state.products.productsList);
+
   return (
     <div className="products__wrapper">
-      {productList.map((product) => {
+      {products.map((product) => {
         return (
           <ProductCard
             alt=""
             src={product.image}
             key={product.id}
+            id={product.id}
             product={product}
           />
         );

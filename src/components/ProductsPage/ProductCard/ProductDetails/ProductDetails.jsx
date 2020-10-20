@@ -1,17 +1,19 @@
 import React from "react";
+
 import PropTypes from "prop-types";
-import { addToCart } from "../../../../redux/actions/cartActions";
+import { addProductToCart } from "../../../../redux/actions/cartActions";
 import { useDispatch } from "react-redux";
 
 const ProductDetails = ({ id, name, price }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   return (
     <div className="details">
       <div className="textContent">
         <h3>{name}</h3>
         <div className="price">{price} $</div>
       </div>
-      <button onClick={() => dispatch(addToCart(id))}>ADD TO CART</button>
+
+      <button onClick={() => dispatch(addProductToCart(id))}>ADD TO CART</button>
     </div>
   );
 };

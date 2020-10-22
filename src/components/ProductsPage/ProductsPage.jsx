@@ -5,14 +5,13 @@ import { useSelector } from "react-redux";
 
 const ProductsPage = () => {
 
-  const products = useSelector((state) => state.products.productsList);
-
+  const products = useSelector((state) => state.products.productList);
+  
   return (
     <div className="products__wrapper">
       {products.map((product) => {
         return (
           <ProductCard
-            alt=""
             src={product.image}
             key={product.id}
             id={product.id}

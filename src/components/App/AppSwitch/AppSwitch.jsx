@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import Cart from "../../Cart/Cart";
+import CartPage from "../../CartPage/CartPage";
 import ProductsPage from "../../ProductsPage/ProductsPage";
 
 const AppSwitch = () => {
@@ -13,7 +13,7 @@ const AppSwitch = () => {
         <ProductsPage />
       </Route>
       <Route exact path="/cart">
-        <Cart />
+        <CartPage />
       </Route>
     </Switch>
   );

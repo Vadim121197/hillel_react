@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const ProductInfo = ({ summary, price, count, name }) => {
   return (
@@ -12,12 +12,10 @@ const ProductInfo = ({ summary, price, count, name }) => {
   );
 };
 
-
 ProductInfo.propTypes = {
   summary: PropTypes.number.isRequired,
   price: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired
-
-}
+  name: PropTypes.string.isRequired,
+};
 export default ProductInfo;

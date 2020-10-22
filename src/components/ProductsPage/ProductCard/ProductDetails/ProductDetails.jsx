@@ -13,7 +13,9 @@ const ProductDetails = ({ id, name, price }) => {
         <div className="price">{price} $</div>
       </div>
 
-      <button onClick={() => dispatch(addProductToCart(id))}>ADD TO CART</button>
+      <button onClick={() => dispatch(addProductToCart(id))}>
+        ADD TO CART
+      </button>
     </div>
   );
 };

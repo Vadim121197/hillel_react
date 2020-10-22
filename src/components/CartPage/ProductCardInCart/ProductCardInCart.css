@@ -54,3 +54,8 @@ image{
     color: #fff;
     border-radius: 5px;
 }
+
+.textContent__summary{
+    font-size:20px;
+    margin-left: auto;
+}

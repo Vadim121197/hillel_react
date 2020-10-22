@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 
 const CartHeader = () => {
   const cartList = useSelector((state) => state.cart.cartList);
-  
-  const sum = cartList.reduce(
-    (accum, currentValue) => accum + currentValue.count,
-    0
+
+  const sum = useMemo(
+    () =>
+      cartList.reduce((accum, currentValue) => accum + currentValue.count, 0),
+    [cartList]
   );
   return (
     <li className="nav_cart">

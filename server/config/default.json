@@ -1,0 +1,4 @@
+{
+    "PORT": 5000,
+    "MONGO_URL": "mongodb+srv://vadim:O3UT9RtUVnVEPYiM@cluster0.p19a9.mongodb.net/app?retryWrites=true&w=majority"
+}

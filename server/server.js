@@ -20,7 +20,9 @@ app.use("/api", require("./routes/auth.routes.js"));
 //products routes
 app.use("/api", require("./routes/products.routes.js"));
 
-app.use("*", (req, res) => res.status(500).json({ message: "Страница не найдена" }));
+app.use("*", (req, res) => {
+  return res.status(500).json({ message: "Страница не найдена" });
+});
 
 app.use("*", (err, req, res, next) => {
   console.error(err.stack);

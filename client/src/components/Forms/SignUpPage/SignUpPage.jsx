@@ -1,33 +1,40 @@
 import React from "react";
-import { reduxForm, Field } from "redux-form";
+import { Field, reduxForm } from "redux-form";
+import { NavLink } from "react-router-dom";
+import "./SignUpPage.css";
+import { renderField, validate } from "../../../helpers/helpers";
 
-const SignUpPage = (props) => {
+const SignUpPage = () => {
   return (
-    <form className='forms'>
+    <form className="forms">
       <h2>Sign up</h2>
-      <div className="form-group">
-        <label htmlFor="email">Email Address</label>
-        <Field
-          name="email"
-          component="input"
-          className="form-control"
-          type="email"
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="password">Password</label>
-        <Field
-          name="password"
-          className="form-control"
-          component="input"
-          type="password"
-        />
-      </div>
-      <button type="submit" className="btn btn-primary">Sign In</button>
+      <Field
+        name="email"
+        label="Email Address"
+        type="text"
+        component={renderField}
+      />
+      <Field
+        name="password"
+        label="Password"
+        type="password"
+        component={renderField}
+      />
+      <Field
+        name="confPass"
+        label="Confirm Password"
+        type="password"
+        component={renderField}
+      />
+      <button type="submit" className="btn btn-primary">
+        Sign Up
+      </button>
+      <NavLink to="/">Already have an account?</NavLink>
     </form>
   );
 };
 
 export default reduxForm({
   form: "signUp",
+  validate,
 })(SignUpPage);

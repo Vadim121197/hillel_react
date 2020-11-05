@@ -1,0 +1,33 @@
+.forms {
+    width: 700px;
+    margin: 200px auto;
+    background-color: rgb(174, 174, 187);
+    display: flex;
+    flex-direction: column;
+}
+
+.forms h2 {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.forms button {
+    width: 300px;
+    margin-left: 200px;
+}
+
+.form-group {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.btn {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.forms a {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}

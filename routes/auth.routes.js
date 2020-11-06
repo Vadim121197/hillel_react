@@ -14,16 +14,15 @@ router.post(
     check("password", "Минимальная длина 6 символов").isLength({ min: 6 }),
   ],
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
-    }
-    const { email, password } = req.body;
-
     try {
+      const errors = validationResult(req);
+
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+        });
+      }
+      const { email, password } = req.body;
       const candidate = await User.findOne({ email });
 
       if (candidate) {
@@ -36,24 +35,21 @@ router.post(
 
       await user.save();
 
-      const token = jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-        expireIn: "1h",
-      });
-
-      jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-        expireIn: "1h",
-      });
-
-
-      return res
-        .status(201)
-        .json({
-          token,
-          userId: user.id,
-          message: "Пользователь создан успешно",
-        });
+      jwt.sign(
+        { userId: user.id },
+        config.get("jwtSecret"),
+        {
+          expiresIn: 10000,
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.status(200).json({
+            message: "Пользователь создан успешно",
+          });
+        }
+      );
     } catch (error) {
-      return res.status(500).json({ message: "Что-то пошло не так" });
+      return res.status(500).json({ message: 'Что-то пошло не так' });
     }
   }
 );

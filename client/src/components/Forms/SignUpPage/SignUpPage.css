@@ -27,6 +27,8 @@
 }
 
 .forms a {
+    margin: 0 auto;
+    width: 200px;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 30px;

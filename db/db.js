@@ -5,15 +5,14 @@ const MONGO_URL = config.get("MONGO_URL");
 
 const startMongoServer = async () => {
   try {
-    await mongoose.connect(MONGO_URL, {
+    return await mongoose.connect(MONGO_URL, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
     });
-    console.log("Connected to DB");
   } catch (error) {
-    console.log("Server Error".error);
-    process.exit(1);
+    console.log("Error DD", error);
+    return process.exit(1);
   }
 };
 

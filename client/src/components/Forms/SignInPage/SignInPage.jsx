@@ -1,12 +1,36 @@
 import React from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, reset } from "redux-form";
+import axios from "axios";
 import { renderField, validate } from "../../../helpers/helpers";
 import "./SignInPage.css";
+import { getFormValues } from "../../../redux/selectors/formsSelector";
 
 const SignInPage = () => {
+  const [alert, setAlert] = useState("");
+
+  const formValues = useSelector(state => getFormValues(state, "signIn"))
+  const dispatch = useDispatch();
+
+  const signInHandler = async (e) => {
+    e.preventDefault();
+    try {
+      await axios
+        .post("/api/auth/login", { ...formValues })
+        .then((response) => setAlert(response.data.message))
+        .catch((error) => console.log(error));
+    } catch (error) {
+      console.log(error);
+    }
+
+    dispatch(reset("signIn"));
+  };
+
+  console.log(formValues);
   return (
-    <form className="forms">
+    <form className="forms" onSubmit={signInHandler}>
       <h2>Sign in</h2>
       <Field
         name="email"
@@ -19,7 +43,9 @@ const SignInPage = () => {
         label="Password"
         type="password"
         component={renderField}
+        autocomplete="new-password"
       />
+      <h4>{alert}</h4>
       <button type="submit" className="btn btn-primary">
         Sign In
       </button>

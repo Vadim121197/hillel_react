@@ -18,7 +18,7 @@ export const renderField = ({
         className="form-control"
       />
       {touched &&
-        ((error && <span>{error}</span>) ||
+        ((error && <span className="errors">{error}</span>) ||
           (warning && <span>{warning}</span>))}
     </div>
   </div>

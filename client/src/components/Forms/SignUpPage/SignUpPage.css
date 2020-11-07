@@ -11,6 +11,14 @@
     padding-top: 50px;
 }
 
+.forms h4 {
+    text-align: center;
+    color: crimson;
+}
+.forms .errors{
+    color: crimson;
+}
+
 .forms button {
     width: 300px;
     margin-left: 200px;

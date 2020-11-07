@@ -22,14 +22,20 @@ router.post(
           errors: errors.array(),
         });
       }
-      const { email, password } = req.body;
+      const { email, password, confPass } = req.body;
       const candidate = await User.findOne({ email });
 
+      if (password !== confPass) {
+        return res.json();
+      }
+
       if (candidate) {
-        return res.status(400).json({ message: "Пользователь существует" });
+        return res.json({ message: "Пользователь существует" });
       }
 
       const hashedPassword = await bcrypt.hash(password, 12);
+
+      
 
       const user = new User({ email, password: hashedPassword });
 
@@ -49,7 +55,7 @@ router.post(
         }
       );
     } catch (error) {
-      return res.status(500).json({ message: 'Что-то пошло не так' });
+      return res.status(500).json({ message: "Что-то пошло не так" });
     }
   }
 );
@@ -74,24 +80,26 @@ router.post(
       const user = await User.findOne({ email });
 
       if (!user) {
-        return res.status(400).json({ message: "Пользователь не найден" });
+        return res.json({ message: "Пользователь не найден" });
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).json({ message: "Неверный пароль" });
+        return res.json({ message: "Неверный пароль" });
       }
 
-      jwt.sign({ userId: user.id }, config.get("jwtSecret"), {
-        expireIn: "1h",
-      });
-
-      return res.json({
-        token,
-        userId: user.id,
-        message: "Пользователь авторизован",
-      });
+      jwt.sign(
+        { userId: user.id },
+        config.get("jwtSecret"),
+        {
+          expiresIn: 10000,
+        },
+        (err, token) => {
+          if (err) throw err;
+          res.status(200).json({ message: "Пользователь успешно вошел" });
+        }
+      );
     } catch (error) {
       return res.status(500).json({ message: "Что-то пошло не так" });
     }

@@ -1,28 +1,37 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Field, reduxForm } from "redux-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Field, reduxForm, reset } from "redux-form";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import "./SignUpPage.css";
 import { renderField, validate } from "../../../helpers/helpers";
+import { getFormValues } from "../../../redux/selectors/formsSelector";
 
 const SignUpPage = () => {
-  const form = useSelector((state) => state.form["signUp"]);
   const [alert, setAlert] = useState("");
 
-  console.log(form);
+  const formValues = useSelector((state) => getFormValues(state, "signUp"));
+  const dispatch = useDispatch();
+
   const signUpHandler = async (e) => {
     e.preventDefault();
     try {
-      const data = await axios
-        .post("/api/auth/signup", { ...form.values })
-        .then((response) => console.log(response.data));
+      await axios
+        .post("/api/auth/signup", { ...formValues })
+        .then((response) => setAlert(response.data.message))
+        .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
     }
+
+    if (alert === "Пользователь создан успешно") {
+      dispatch(reset("signUp"));
+    }
   };
+
+  console.log(formValues);
   return (
-    <form className="forms">
+    <form className="forms" onSubmit={signUpHandler}>
       <h2>Sign up</h2>
       <Field
         name="email"
@@ -35,14 +44,17 @@ const SignUpPage = () => {
         label="Password"
         type="password"
         component={renderField}
+        autocomplete="new-password"
       />
       <Field
         name="confPass"
         label="Confirm Password"
         type="password"
         component={renderField}
+        autocomplete="new-password"
       />
-      <button type="submit" className="btn btn-primary" onClick={signUpHandler}>
+      <h4>{alert}</h4>
+      <button type="submit" className="btn btn-primary">
         Sign Up
       </button>
       <NavLink to="/">Already have an account?</NavLink>

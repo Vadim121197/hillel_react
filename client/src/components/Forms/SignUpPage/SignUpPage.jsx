@@ -6,9 +6,13 @@ import axios from "axios";
 import "./SignUpPage.css";
 import { renderField, validate } from "../../../helpers/helpers";
 import { getFormValues } from "../../../redux/selectors/formsSelector";
+import { AuthContext } from "../../../context/AuthContext";
+import { useContext } from "react";
 
 const SignUpPage = () => {
   const [alert, setAlert] = useState("");
+
+  const auth = useContext(AuthContext);
 
   const formValues = useSelector((state) => getFormValues(state, "signUp"));
   const dispatch = useDispatch();
@@ -18,7 +22,10 @@ const SignUpPage = () => {
     try {
       await axios
         .post("/api/auth/signup", { ...formValues })
-        .then((response) => setAlert(response.data.message))
+        .then((response) => {
+          setAlert(response.data.message)
+          auth.login(response.data.token, response.data.userId);
+        })
         .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);

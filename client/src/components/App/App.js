@@ -1,14 +1,31 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useAuth } from "../../hooks/useAuth";
 import { useRoutes } from "../../routes";
 import "./App.css";
+import Header from "./Header/Header";
+
 const App = () => {
-  const routes = useRoutes(false);
- 
+  const { login, logout, token, userId } = useAuth();
+  const isAuthenticated = !!token;
+  const routes = useRoutes(isAuthenticated);
+
   return (
-    <div className="wrapper">
-      <Router>{routes}</Router>
-    </div>
+    <AuthContext.Provider
+      value={{ login, logout, token, userId, isAuthenticated }}
+    >
+      <div className="wrapper">
+        <Router>
+          {isAuthenticated ? (
+            <>
+              <Header />
+            </>
+          ) : null}
+          {routes}
+        </Router>
+      </div>
+    </AuthContext.Provider>
   );
 };
 

@@ -35,8 +35,6 @@ router.post(
 
       const hashedPassword = await bcrypt.hash(password, 12);
 
-      
-
       const user = new User({ email, password: hashedPassword });
 
       await user.save();
@@ -51,6 +49,8 @@ router.post(
           if (err) throw err;
           res.status(200).json({
             message: "Пользователь создан успешно",
+            userId: user.id,
+            token,
           });
         }
       );
@@ -97,7 +97,11 @@ router.post(
         },
         (err, token) => {
           if (err) throw err;
-          res.status(200).json({ message: "Пользователь успешно вошел" });
+          res.status(200).json({
+            message: "Пользователь успешно вошел",
+            userId: user.id,
+            token,
+          });
         }
       );
     } catch (error) {

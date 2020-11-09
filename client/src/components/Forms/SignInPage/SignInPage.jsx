@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -7,11 +7,14 @@ import axios from "axios";
 import { renderField, validate } from "../../../helpers/helpers";
 import "./SignInPage.css";
 import { getFormValues } from "../../../redux/selectors/formsSelector";
+import { AuthContext } from "../../../context/AuthContext";
 
 const SignInPage = () => {
+  const auth = useContext(AuthContext);
+
   const [alert, setAlert] = useState("");
 
-  const formValues = useSelector(state => getFormValues(state, "signIn"))
+  const formValues = useSelector((state) => getFormValues(state, "signIn"));
   const dispatch = useDispatch();
 
   const signInHandler = async (e) => {
@@ -19,7 +22,10 @@ const SignInPage = () => {
     try {
       await axios
         .post("/api/auth/login", { ...formValues })
-        .then((response) => setAlert(response.data.message))
+        .then((response) => {
+          setAlert(response.data.message);
+          auth.login(response.data.token, response.data.userId);
+        })
         .catch((error) => console.log(error));
     } catch (error) {
       console.log(error);
@@ -28,7 +34,6 @@ const SignInPage = () => {
     dispatch(reset("signIn"));
   };
 
-  console.log(formValues);
   return (
     <form className="forms" onSubmit={signInHandler}>
       <h2>Sign in</h2>

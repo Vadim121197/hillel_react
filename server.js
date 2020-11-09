@@ -1,5 +1,4 @@
 const express = require("express");
-const MongoClient = require("mongodb").MongoClient;
 const bodyParser = require("body-parser");
 const config = require("config");
 const startMongoServer = require("./db/db.js");
@@ -15,6 +14,9 @@ app.use(bodyParser.json());
 
 //auth routes
 app.use("/api", require("./routes/auth.routes"));
+
+//products routes
+app.use("/api", require("./routes/products.routes"));
 
 //products routes
 // app.use("/api", require("./routes/products.routes.js"));

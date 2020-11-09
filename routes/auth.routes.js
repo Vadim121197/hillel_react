@@ -22,6 +22,7 @@ router.post(
           errors: errors.array(),
         });
       }
+      
       const { email, password, confPass } = req.body;
       const candidate = await User.findOne({ email });
 

@@ -1,16 +1,16 @@
 const { Router } = require("express");
 const fs = require("fs");
 const { check, validationResult } = require("express-validator");
-const Products = require("../models/Product");
 const Product = require("../models/Product");
+const { db } = require("../models/Product");
 
 const router = Router();
 
 //получить все продукты
 router.get("/products", (req, res) => {
   try {
-    const products = JSON.parse(fs.readFileSync("./products.json"));
-    res.json(products);
+    db.collection('products').find().toArray()
+    .then(response => res.json(response)) ;
   } catch (error) {
     return res.status(500).json({ message: "Что-то пошло не так" });
   }
@@ -73,7 +73,6 @@ router.put(
     check("name", "Пустое полe").exists(),
     check("amount", "Введите число").isNumeric(),
   ],
-  productValidator,
   (req, res) => {
     try {
       //возвращаем ошибки на front-end

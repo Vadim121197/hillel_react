@@ -34,6 +34,7 @@ const SignInPage = () => {
     dispatch(reset("signIn"));
   };
 
+  console.log(formValues)
   return (
     <form className="forms" onSubmit={signInHandler}>
       <h2>Sign in</h2>

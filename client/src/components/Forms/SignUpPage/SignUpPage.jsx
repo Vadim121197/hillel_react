@@ -23,7 +23,7 @@ const SignUpPage = () => {
       await axios
         .post("/api/auth/signup", { ...formValues })
         .then((response) => {
-          setAlert(response.data.message)
+          setAlert(response.data.message);
           auth.login(response.data.token, response.data.userId);
         })
         .catch((error) => console.log(error));

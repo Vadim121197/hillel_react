@@ -14,14 +14,14 @@ const Header = () => {
   return (
     <Menu inverted>
       <NavLink to="/">
-        <Menu.Item name="Home" />
+        <Menu.Item name="Домашняя" />
       </NavLink>
       <NavLink to="/products">
-        <Menu.Item name="products" />
+        <Menu.Item name="Продукты" />
       </NavLink>
       <Menu.Item position="right">
         <Button primary onClick={logOutHandler}>
-          Log Out
+          Выйти
         </Button>
       </Menu.Item>
     </Menu>

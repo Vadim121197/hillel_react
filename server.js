@@ -19,15 +19,15 @@ app.use("/api", require("./routes/auth.routes"));
 app.use("/api", require("./routes/products.routes"));
 
 //products routes
-// app.use("/api", require("./routes/products.routes.js"));
+app.use("/api", require("./routes/products.routes.js"));
 
-// app.use("*", (req, res) => {
-//   return res.status(500).json({ message: "Страница не найдена" });
-// });
+app.use("*", (req, res) => {
+  return res.status(500).json({ message: "Страница не найдена" });
+});
 
-// app.use("*", (err, req, res, next) => {
-//   console.error(err.stack);
-//   return res.status(500).json({ message: "Что-то пошло не так" });
-// });
+app.use("*", (err, req, res, next) => {
+  console.error(err.stack);
+  return res.status(500).json({ message: "Что-то пошло не так" });
+});
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));

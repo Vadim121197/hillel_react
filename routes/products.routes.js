@@ -9,22 +9,24 @@ const router = Router();
 //получить все продукты
 router.get("/products", (req, res) => {
   try {
-    db.collection('products').find().toArray()
-    .then(response => res.json(response)) ;
+    db.collection("products")
+      .find()
+      .toArray()
+      .then((response) => res.json(response));
   } catch (error) {
     return res.status(500).json({ message: "Что-то пошло не так" });
   }
 });
 
 //получить продукт по id
-router.get("/products/:id", (req, res) => {
+router.get("/products/:id", async (req, res) => {
   try {
-    const id = +req.params.id;
-    const products = JSON.parse(fs.readFileSync("./products.json"));
-    const findProduct = products.find((product) => product.id === id);
-    if (!findProduct) {
-      return res.status(404).json({ message: "Пользователь не найден" });
-    }
+    const id = req.params.id;
+
+    const findProduct = await Product.findById(id, function (err, doc) {
+      if (err) return console.log(err);
+    });
+
     return res.json(findProduct);
   } catch (error) {
     return res.status(500).json({ message: "Что-то пошло не так" });
@@ -59,21 +61,21 @@ router.post(
       const product = new Product({ name, price });
       await product.save();
 
-      return res.json({ message: "продукт успешно добавлен" });
+      return res.json();
     } catch (error) {
       return res.status(500).json({ message: "Что-то пошло не так" });
     }
   }
 );
 
-//обновление данных в продукте - другой валидатор
+//обновление данных в продукте
 router.put(
   "/products/:id",
   [
     check("name", "Пустое полe").exists(),
-    check("amount", "Введите число").isNumeric(),
+    check("price", "Введите число").isNumeric(),
   ],
-  (req, res) => {
+  async (req, res) => {
     try {
       //возвращаем ошибки на front-end
       const errors = validationResult(req);
@@ -84,20 +86,15 @@ router.put(
         });
       }
 
-      const { name, amount } = req.body;
-      const id = +req.params.id;
-      const products = JSON.parse(fs.readFileSync("./products.json"));
+      const { name, price } = req.body;
+      const id = req.params.id;
 
-      const findProduct = products.find((product) => product.id === id);
-      if (!findProduct) {
-        return res.status(404).json({ message: "Пользователь не найден" });
-      }
-
-      const updateProducts = products.map((product) =>
-        product.id === id ? { id, name, amount } : product
-      );
-
-      fs.writeFileSync("./products.json", JSON.stringify(updateProducts));
+      await Product.findByIdAndUpdate(id, { name, price }, function (
+        err,
+        user
+      ) {
+        if (err) return console.log(err);
+      });
 
       return res.json({ message: "продукт успешно обновлён" });
     } catch (error) {
@@ -107,19 +104,14 @@ router.put(
 );
 
 //удаление продукта по id
-router.delete("/products/:id", (req, res) => {
+router.delete("/products/:id", async (req, res) => {
   try {
-    const id = +req.params.id;
-    const products = JSON.parse(fs.readFileSync("./products.json"));
-    const findProduct = products.find((product) => product.id === id);
-    if (!findProduct) {
-      return res.status(404).json({ message: "Пользователь не найден" });
-    }
-    products.splice(findProduct, 1);
+    const id = req.params.id;
+    await Product.findByIdAndDelete(id, function (err, doc) {
+      if (err) return console.log(err);
+    });
 
-    fs.writeFileSync("./products.json", JSON.stringify(products));
-
-    return res.json({ message: "продукт успешно удалён" });
+    return res.json({ message: "Продукт успешно удалён" });
   } catch (error) {
     return res.status(500).json({ message: "Что-то пошло не так" });
   }

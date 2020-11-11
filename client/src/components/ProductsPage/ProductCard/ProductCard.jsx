@@ -1,19 +1,17 @@
 import React from "react";
-import { Header, Table } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { name, _id, price } = product;
+
   return (
     <>
       <tbody>
         <tr>
-          <td>{name}</td>
-          <td>{price}</td>
-
           <td>
-            <button>Change</button>
-            <button>Delete</button>
+            <NavLink to={`/products/${_id}`}>{name}</NavLink>
           </td>
+          <td>{price}</td>
         </tr>
       </tbody>
     </>

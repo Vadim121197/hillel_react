@@ -4,6 +4,7 @@ export const renderField = ({
   input,
   label,
   type,
+  value,
   name,
   meta: { touched, error, warning },
 }) => (
@@ -34,12 +35,23 @@ export const validate = (values) => {
   }
 
   if (!values.password) {
-    errors.password = "Пустое полу";
+    errors.password = "Пустое поле";
   } else if (values.password.length < 6) {
     errors.password = "Минимальная длина 6 символов";
   }
   if (values.confPass !== values.password) {
     errors.confPass = "Неверный пароль";
   }
+
+  if (!values.name) {
+    errors.name = "Пустое поле";
+  }
+
+  if (!values.price) {
+    errors.price = "Пустое полe";
+  } else if (isNaN(+values.price)) {
+    errors.price = "Должно быть число";
+  }
+
   return errors;
 };
